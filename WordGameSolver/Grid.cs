@@ -10,7 +10,7 @@ namespace WordGameSolver
     {
         private List<List<char>> grid = null;
         private WordTree tree = null;
-        
+                
         public LetterGrid(WordTree inTree)
         {
             tree = inTree;
@@ -54,6 +54,10 @@ namespace WordGameSolver
                     foundWords.AddRange(SolveCell(x, y));
                 }
             }
+            // sort returned words by length of words, descending.
+            foundWords = (from s in foundWords
+             orderby s.Length descending 
+             select s).Distinct().ToList();
             return foundWords;
         }
 
