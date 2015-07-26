@@ -21,6 +21,7 @@ namespace WordGameSolver
     public partial class MainWindow : Window
     {
         public WordTree Words { get; set; }
+        public List<List<char>> Grid = new List<List<char>>();
         public MainWindow()
         {
             InitializeComponent();
@@ -36,6 +37,10 @@ namespace WordGameSolver
             if (keyboardFocus != null)
             {
                 keyboardFocus.MoveFocus(tRequest);
+                if ((Keyboard.FocusedElement as TextBox) != null)
+                {
+                    (Keyboard.FocusedElement as TextBox).SelectAll();
+                }
             }
         }
 
@@ -49,6 +54,29 @@ namespace WordGameSolver
             if (tb.Text.Length == tb.MaxLength)
             {
                 this.MoveNext();
+            }
+        }
+        
+        private void LetterFocus(object sender, RoutedEventArgs e)
+        {
+            (sender as TextBox).SelectAll();
+        }
+
+
+        private void SolveGrid_Click(object sender, RoutedEventArgs e)
+        {
+            Grid = new List<List<char>>();
+            try
+            { 
+                Grid.Add(new List<char> { Letter00.Text[0], Letter01.Text[0], Letter02.Text[0], Letter03.Text[0] });
+                Grid.Add(new List<char> { Letter10.Text[0], Letter11.Text[0], Letter12.Text[0], Letter13.Text[0] });
+                Grid.Add(new List<char> { Letter20.Text[0], Letter21.Text[0], Letter22.Text[0], Letter23.Text[0] });
+                Grid.Add(new List<char> { Letter30.Text[0], Letter31.Text[0], Letter32.Text[0], Letter33.Text[0] });
+            }
+            catch
+            {
+                MessageBox.Show("Please enter one letter into each grid cell before solving grid.");
+                return;
             }
         }
     }
