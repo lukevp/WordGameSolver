@@ -30,7 +30,7 @@ namespace WordGameSolver
             Words = new WordTree(@"word-lists\main-list.txt");
             Words.PrintTree("tree-representation.txt");
 
-            InputGrid = new LetterGrid();
+            InputGrid = new LetterGrid(Words);
         }
 
         public void MoveNext()
@@ -69,7 +69,7 @@ namespace WordGameSolver
 
         private void SolveGrid_Click(object sender, RoutedEventArgs e)
         {
-            if (InputGrid.IsValid)
+            if (!InputGrid.IsValid)
             {
                 MessageBox.Show("Please enter one letter into each grid cell before solving grid.");
                 return;

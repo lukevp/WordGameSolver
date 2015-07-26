@@ -18,7 +18,7 @@ namespace WordGameSolver
             var words = File.ReadAllLines(wordFilePath);
             foreach(var word in words)
             {
-                this.AddWord(word);
+                this.AddWord(word.ToUpperInvariant());
             }
         }
 
@@ -71,6 +71,24 @@ namespace WordGameSolver
                 currentNode = currentNode.Nodes[word[index]];
                 AddWord(word, index + 1, currentNode);
             }
+        }
+
+        public WordTreeNode GetNode(string query)
+        {
+            WordTreeNode currentNode = this.RootNode;
+            foreach (var c in query)
+            {
+                if (currentNode.Nodes.ContainsKey(c))
+                {
+                    currentNode = currentNode.Nodes[c];
+                }
+                else
+                {
+                    currentNode = null;
+                    break;
+                }
+            }
+            return currentNode;
         }
     }
 
