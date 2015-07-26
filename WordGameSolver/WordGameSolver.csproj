@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Game.cs" />
     <Compile Include="Grid.cs" />
     <Compile Include="WordTree.cs" />
     <Page Include="MainWindow.xaml">

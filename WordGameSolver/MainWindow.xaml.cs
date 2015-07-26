@@ -75,7 +75,12 @@ namespace WordGameSolver
                 return;
             }
             List<string> solution = InputGrid.Solve();
-            SolutionText.Text = string.Join("\r\n", solution);
+            var text = "";
+            foreach (var word in solution)
+            {
+                text += word + " - " + Game.ScoreWord(word).ToString() + "\n";
+            }
+            SolutionText.Text = text;
         }
     }
 }
