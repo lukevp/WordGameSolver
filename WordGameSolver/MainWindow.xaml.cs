@@ -76,9 +76,16 @@ namespace WordGameSolver
             }
             List<string> solution = InputGrid.Solve();
             var text = "";
+            var currentLength = -1;
             foreach (var word in solution)
             {
-                text += word + " - " + Game.ScoreWord(word).ToString() + "\n";
+                if (word.Length != currentLength)
+                {
+                    currentLength = word.Length;
+                    text += word.Length.ToString() + " Letter Words\n";
+                    text += "--------------------\n";
+                }
+                text += "\t" + word + " - " + Game.ScoreWord(word).ToString() + "\n";
             }
             SolutionText.Text = text;
         }
