@@ -46,7 +46,7 @@
             <TextBox Grid.Row="3" Grid.Column="3" Name="Letter33" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,10,10,10" FontSize="40" MaxLength="1" KeyUp="LetterKeyUp" GotFocus="LetterFocus" TextAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" BorderThickness="3" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"></TextBox>
         </Grid>
         <Button x:Name="SolveGrid" Grid.Row="1" Margin="5" Click="SolveGrid_Click">Solve Grid</Button>
-        <TextBlock Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">TEXT</TextBlock>
+        <TextBlock Name="SolutionText" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">TEXT</TextBlock>
 
 
     </Grid>

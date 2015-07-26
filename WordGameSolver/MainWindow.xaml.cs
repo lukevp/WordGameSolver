@@ -22,38 +22,15 @@ namespace WordGameSolver
     {
         public WordTree Words { get; set; }
 
-        private bool lettersChanged = true;
-
-        private List<List<char>> _grid = new List<List<char>>();
-        public List<List<char>> Grid
-        {
-            get
-            {
-                if (lettersChanged)
-                { 
-                    _grid = new List<List<char>>();
-                    try
-                    {
-                        _grid.Add(new List<char> { Letter00.Text[0], Letter01.Text[0], Letter02.Text[0], Letter03.Text[0] });
-                        _grid.Add(new List<char> { Letter10.Text[0], Letter11.Text[0], Letter12.Text[0], Letter13.Text[0] });
-                        _grid.Add(new List<char> { Letter20.Text[0], Letter21.Text[0], Letter22.Text[0], Letter23.Text[0] });
-                        _grid.Add(new List<char> { Letter30.Text[0], Letter31.Text[0], Letter32.Text[0], Letter33.Text[0] });
-                    }
-                    catch
-                    {
-                        _grid = null;
-                    }
-                }
-                lettersChanged = false;
-                return _grid;
-            }
-        }
+        public LetterGrid InputGrid { get; set; }
         public MainWindow()
         {
             InitializeComponent();
 
             Words = new WordTree(@"word-lists\main-list.txt");
             Words.PrintTree("tree-representation.txt");
+
+            InputGrid = new LetterGrid();
         }
 
         public void MoveNext()
@@ -81,7 +58,7 @@ namespace WordGameSolver
             {
                 this.MoveNext();
             }
-            lettersChanged = true;
+            InputGrid.Update(this);
         }
         
         private void LetterFocus(object sender, RoutedEventArgs e)
@@ -92,12 +69,13 @@ namespace WordGameSolver
 
         private void SolveGrid_Click(object sender, RoutedEventArgs e)
         {
-            if (Grid == null)
+            if (InputGrid.IsValid)
             {
                 MessageBox.Show("Please enter one letter into each grid cell before solving grid.");
                 return;
             }
-
+            List<string> solution = InputGrid.Solve();
+            SolutionText.Text = string.Join("\r\n", solution);
         }
     }
 }
