@@ -22,6 +22,35 @@ namespace WordGameSolver
             }
         }
 
+        public void PrintTree(string outputPath)
+        {
+            File.WriteAllText(outputPath, PrintNode(RootNode));
+        }
+        public string PrintNode(WordTreeNode node, string pastNodes="", int tabCount=0)
+        {
+            string retVal = "";
+            if (node.IsLeaf)
+            {
+                retVal += new String('\t', tabCount) + node.Word + "#\n";
+            }
+            else
+            {
+                retVal += new String('\t', tabCount) + pastNodes;
+                if (node.Word != null)
+                {
+                    retVal += "*\n";
+                }
+                else
+                {
+                    retVal += "\n";
+                }
+                foreach (var child in node.Nodes)
+                {
+                    retVal += PrintNode(child.Value, pastNodes + child.Key, tabCount + 1);
+                }
+            }
+            return retVal;
+        }
 
 
         public void AddWord(string word, int index=0, WordTreeNode currentNode=null)
@@ -52,7 +81,7 @@ namespace WordGameSolver
 
         public WordTreeNode()
         {
-            Nodes = new Dictionary<char, WordTreeNode>();
+            Nodes = new SortedDictionary<char, WordTreeNode>();
         }
         
         public bool IsLeaf
@@ -62,7 +91,8 @@ namespace WordGameSolver
                 return Nodes.Count == 0;
             }
         }
+        
 
-        public Dictionary<char, WordTreeNode> Nodes { get; set; }
+        public SortedDictionary<char, WordTreeNode> Nodes { get; set; }
     }
 }

@@ -26,6 +26,7 @@ namespace WordGameSolver
             InitializeComponent();
 
             Words = new WordTree(@"word-lists\main-list.txt");
+            Words.PrintTree("tree-representation.txt");
         }
 
         public void MoveNext()
