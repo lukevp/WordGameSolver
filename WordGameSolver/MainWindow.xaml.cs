@@ -20,9 +20,12 @@ namespace WordGameSolver
     /// </summary>
     public partial class MainWindow : Window
     {
+        public WordTree Words { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+
+            Words = new WordTree(@"word-lists\main-list.txt");
         }
 
         public void MoveNext()

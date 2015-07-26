@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="WordTree.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,6 +94,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="word-lists\12dicts\2+2gfreq.txt" />
+    <Resource Include="word-lists\12dicts\2+2lemma.txt" />
+    <Resource Include="word-lists\12dicts\2of12.txt" />
+    <Resource Include="word-lists\12dicts\2of12inf.txt" />
+    <Resource Include="word-lists\12dicts\2of4brif.txt" />
+    <Resource Include="word-lists\12dicts\3esl.txt" />
+    <Resource Include="word-lists\12dicts\5desk.txt" />
+    <Resource Include="word-lists\12dicts\6of12.txt" />
+    <Resource Include="word-lists\12dicts\agid.txt" />
+    <Resource Include="word-lists\12dicts\neol2007.txt" />
+    <Content Include="word-lists\12dicts\readme.html" />
+    <Content Include="word-lists\12dicts\ReadmeR5.html" />
+    <None Include="word-lists\main-list.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="word-lists\short-list.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
