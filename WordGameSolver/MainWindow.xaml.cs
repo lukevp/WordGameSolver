@@ -21,7 +21,33 @@ namespace WordGameSolver
     public partial class MainWindow : Window
     {
         public WordTree Words { get; set; }
-        public List<List<char>> Grid = new List<List<char>>();
+
+        private bool lettersChanged = true;
+
+        private List<List<char>> _grid = new List<List<char>>();
+        public List<List<char>> Grid
+        {
+            get
+            {
+                if (lettersChanged)
+                { 
+                    _grid = new List<List<char>>();
+                    try
+                    {
+                        _grid.Add(new List<char> { Letter00.Text[0], Letter01.Text[0], Letter02.Text[0], Letter03.Text[0] });
+                        _grid.Add(new List<char> { Letter10.Text[0], Letter11.Text[0], Letter12.Text[0], Letter13.Text[0] });
+                        _grid.Add(new List<char> { Letter20.Text[0], Letter21.Text[0], Letter22.Text[0], Letter23.Text[0] });
+                        _grid.Add(new List<char> { Letter30.Text[0], Letter31.Text[0], Letter32.Text[0], Letter33.Text[0] });
+                    }
+                    catch
+                    {
+                        _grid = null;
+                    }
+                }
+                lettersChanged = false;
+                return _grid;
+            }
+        }
         public MainWindow()
         {
             InitializeComponent();
@@ -55,6 +81,7 @@ namespace WordGameSolver
             {
                 this.MoveNext();
             }
+            lettersChanged = true;
         }
         
         private void LetterFocus(object sender, RoutedEventArgs e)
@@ -65,19 +92,12 @@ namespace WordGameSolver
 
         private void SolveGrid_Click(object sender, RoutedEventArgs e)
         {
-            Grid = new List<List<char>>();
-            try
-            { 
-                Grid.Add(new List<char> { Letter00.Text[0], Letter01.Text[0], Letter02.Text[0], Letter03.Text[0] });
-                Grid.Add(new List<char> { Letter10.Text[0], Letter11.Text[0], Letter12.Text[0], Letter13.Text[0] });
-                Grid.Add(new List<char> { Letter20.Text[0], Letter21.Text[0], Letter22.Text[0], Letter23.Text[0] });
-                Grid.Add(new List<char> { Letter30.Text[0], Letter31.Text[0], Letter32.Text[0], Letter33.Text[0] });
-            }
-            catch
+            if (Grid == null)
             {
                 MessageBox.Show("Please enter one letter into each grid cell before solving grid.");
                 return;
             }
+
         }
     }
 }
